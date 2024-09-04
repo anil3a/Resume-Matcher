@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Resume Matcher](Assets/img/Resume_Matcher_GitHub_Banner.png)](https://www.resumematcher.fyi)
+[![Resume Matcher](app/Assets/img/Resume_Matcher_GitHub_Banner.png)](https://www.resumematcher.fyi)
 
 # Resume Matcher
 
@@ -33,7 +33,7 @@ Upvote us on [ProductHunt 🚀](https://www.producthunt.com/products/resume-matc
 
 **Don't let your resume be a roadblock from getting your next job. Use Resume Matcher!**
 
-![Resume_Matcher_streamlit_demo](Assets/img/Resume_Matcher_Gif.gif)
+![Resume_Matcher_streamlit_demo](app/Assets/img/Resume_Matcher_Gif.gif)
 
 ## How does it work?
 
@@ -61,7 +61,7 @@ The process is as follows:
 
 Follow these steps to set up the environment and run the application.
 
-1. Fork the repository [here](https://github.com/srbhr/Resume-Matcher/fork).
+1. Fork the repository [here](https://github.com/anil3a/Resume-Matcher/fork).
 
 2. Clone the forked repository.
 
@@ -141,7 +141,7 @@ Follow these steps to set up the environment and run the application.
 5. Install Dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r app/requirements.txt
    ```
 
 6. Prepare Data:
@@ -152,13 +152,13 @@ Follow these steps to set up the environment and run the application.
 7. Parse Resumes to JSON:
 
    ```python
-   python run_first.py
+   python app/run_first.py
    ```
 
 8. Run the Application:
 
    ```python
-   streamlit run streamlit_app.py
+   streamlit run app/streamlit_app.py
    ```
 
 **Note**: For local versions, you do not need to run "streamlit_second.py" as it is specifically for deploying to Streamlit servers.
@@ -168,16 +168,35 @@ Follow these steps to set up the environment and run the application.
 <br/>
 
 ### Docker
-
-1. Build the image and start application
+1. Copy `docker-compose.yml.SAMPLE` to `docker-compose.yml`
+2. Configure your docker compose settings
+3. Copy `env.SAMPLE` to `.env` and change your perferences
+4. Build the image and start application
 
    ```bash
        docker-compose up
    ```
 
-2. Open `localhost:80` on your browser
+5. Open `localhost:8011` on your browser
 
 <br/>
+
+### Docker & traefik
+
+1. Create domain host `zresumematcher.com` entry in your `/etc/hosts`
+2. Copy `docker-compose.yml.SAMPLE_TRAEFIK` to `docker-compose.yml`
+3. Configure your docker compose settings
+4. Copy `env.SAMPLE` to `.env` and change your perferences
+5. Build the image and start application
+
+   ```bash
+       docker-compose up
+   ```
+
+6. Open `http://zresumematcher.com` on your browser
+
+<br/>
+
 
 ### Running the Web Application
 

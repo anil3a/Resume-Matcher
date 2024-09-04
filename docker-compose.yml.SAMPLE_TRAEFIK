@@ -16,7 +16,6 @@ services:
       - "traefik.http.routers.resumematcher.rule=Host(`zresumematcher.com`)"
       - "traefik.http.routers.resumematcher.entrypoints=web"
       - "traefik.http.services.resumematcher.loadbalancer.server.port=8501"
-      - "traefik-home.alias=Resume Matcher"
     networks:
       - traefik
     restart: on-failure:3

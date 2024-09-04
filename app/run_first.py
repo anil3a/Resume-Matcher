@@ -1,14 +1,14 @@
 import json
 import logging
 import os
-
 from scripts import JobDescriptionProcessor, ResumeProcessor
 from scripts.utils import get_filenames_from_dir, init_logging_config
 
 init_logging_config()
 
-PROCESSED_RESUMES_PATH = "Data/Processed/Resumes"
-PROCESSED_JOB_DESCRIPTIONS_PATH = "Data/Processed/JobDescription"
+APP_PATH = os.environ.get('APP_PATH', '/app/Resume-Matcher')
+PROCESSED_RESUMES_PATH = f"{APP_PATH}/Data/Processed/Resumes"
+PROCESSED_JOB_DESCRIPTIONS_PATH = f"{APP_PATH}/Data/Processed/JobDescription"
 
 
 def read_json(filename):
@@ -19,19 +19,22 @@ def read_json(filename):
 
 def remove_old_files(files_path):
 
-    for filename in os.listdir(files_path):
-        try:
-            file_path = os.path.join(files_path, filename)
+    if os.path.exists(files_path) and os.path.isdir(files_path):
+        for filename in os.listdir(files_path):
+            try:
+                file_path = os.path.join(files_path, filename)
 
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-        except Exception as e:
-            logging.error(f"Error deleting {file_path}:\n{e}")
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            except Exception as e:
+                logging.error(f"Error deleting {file_path}:\n{e}")
 
-    logging.info("Deleted old files from " + files_path)
+        logging.info("Deleted old files from " + files_path)
+    else:
+        logging.info("No folder like " + files_path)
 
 
-logging.info("Started to read from Data/Resumes")
+logging.info(f"Started to read from {APP_PATH}/Data/Resumes")
 try:
     # Check if there are resumes present or not.
     # If present then parse it.
